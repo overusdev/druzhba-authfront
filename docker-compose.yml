@@ -2,8 +2,8 @@
 # services:
 #   frontendlk:
 #     build: .
-#     image: lkfront
-#     container_name: lkfront
+#     image: authfront
+#     container_name: authfront
 #     # env_file:
 #     #   - .env
 #     ports:

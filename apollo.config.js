@@ -1,7 +1,7 @@
 module.exports = {
     client: {
         service: {
-        name: 'lkfront',
+        name: 'authfront',
         // URL to the GraphQL API
         url: 'http://localhost:3000/graphql',
         },
