@@ -1,11 +1,9 @@
 <template>
   <div class="auth">
     <div class="auth__wrapper">
-      <!-- {{ showGreeting }} -->
       <template v-if="!showGreeting">
         <h3 class="text-h4">Пожалуйста, авторизуйтесь</h3>
         <div class="auth__form-wrapper">
-          <!-- <pre>{{ userData }}</pre> -->
           <q-banner
             v-if="showErrorMessage"
             inline-actions
@@ -68,6 +66,7 @@
       </template>
       <template v-else>
         <p class="text-body2">{{ greetingTextMessage }}</p>
+        <q-spinner-puff color="teal" size="5.5em" />
       </template>
     </div>
   </div>
