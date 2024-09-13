@@ -197,9 +197,12 @@ export default {
       );
       return new Promise((resolve, reject) => {
         graphql.onResult(() => {
-          if(graphql.result.value.userByPassword) {
+          if(graphql.result.value.userByPassword.password === authPassword.value) {
             showGreeting.value = true;
             greetingTextMessage.value = `Добро пожаловать, ${userData.name}!`;
+          } else {
+            showErrorMessage.value = true;
+            errorTextMessage.value = 'Пароль неверный. Обратитесь к предстедателю';
           }
           resolve(graphql.result.value || []);
         });
