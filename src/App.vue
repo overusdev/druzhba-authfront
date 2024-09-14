@@ -130,12 +130,6 @@ export default {
               name
               surname
               patronymic
-              area
-              phone
-              isAdmin
-              password
-              role
-              note
             }
           }
         `,
@@ -151,12 +145,6 @@ export default {
             userData.name = graphql.result.value.userByPhone.name;
             userData.surname = graphql.result.value.userByPhone.surname;
             userData.patronymic = graphql.result.value.userByPhone.patronymic;
-            userData.area = graphql.result.value.userByPhone.area;
-            userData.phone = graphql.result.value.userByPhone.phone;
-            userData.isAdmin = graphql.result.value.userByPhone.isAdmin;
-            userData.password = graphql.result.value.userByPhone.password;
-            userData.role = graphql.result.value.userByPhone.role;
-            userData.note = graphql.result.value.userByPhone.note;
             showPasswordField.value = true;
             showPhoneField.value = false;
           }
@@ -176,18 +164,9 @@ export default {
       const graphql = useQuery(
         gql`
           query findByPassword($password: String!) {
-              userByPassword(password: $password) {
-                  id
-                  name
-                  surname
-                  patronymic
-                  area
-                  phone
-                  isAdmin
-                  password
-                  role
-                  note
-              }
+            userByPassword(password: $password) {
+              phone
+            }
           }
         `,
         { password: authPassword.value },
@@ -197,7 +176,7 @@ export default {
       );
       return new Promise((resolve, reject) => {
         graphql.onResult(() => {
-          if(graphql.result.value.userByPassword.password === authPassword.value) {
+          if(graphql.result.value.userByPassword.phone === authPhone.value) {
             showGreeting.value = true;
             greetingTextMessage.value = `Добро пожаловать, ${userData.name}!`;
           } else {
