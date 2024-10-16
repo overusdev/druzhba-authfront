@@ -122,9 +122,44 @@ export default {
 
 
     onDone(result => {
+      const referrerLink = 'http://localhost:8000/users';
       showGreeting.value = true;
-      localStorage.setItem("dr_access_token", result.data.login.token);
+      setCookie('dr_access_token', result.data.login.token);
+
+      setTimeout(() => {
+        window.location.replace(referrerLink);
+      }, 2500)
     })
+
+    function deleteCookie(name) {
+        setCookie(name, "", {
+          'max-age': -1
+        })
+      }
+    
+    function setCookie(name, value, options = {}) {
+    
+        options = {
+          path: '/',
+          ...options
+        };
+      
+        if (options.expires instanceof Date) {
+          options.expires = options.expires.toUTCString();
+        }
+      
+        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+      
+        for (let optionKey in options) {
+          updatedCookie += "; " + optionKey;
+          let optionValue = options[optionKey];
+          if (optionValue !== true) {
+            updatedCookie += "=" + optionValue;
+          }
+        }
+      
+        document.cookie = updatedCookie;
+    }
 
         return {
             router,
@@ -144,6 +179,8 @@ export default {
             greetingTextMessage,
             sendAuth,
             data,
+            setCookie,
+            deleteCookie,
         }
     },
 }
