@@ -84,10 +84,11 @@ export default {
     const greetingTextMessage = ref('');
     const cache = new InMemoryCache();
     const httpLink = new HttpLink({
-      uri: 'http://localhost:3001/graphql',
+      uri: 'http://localhost:3001/graphql'
     });
     const gqlClient = new ApolloClient({
       link: httpLink,
+      credentials: 'include',
       cache,
     });
     const disable = computed(() => authPhone.value.length < 10);
@@ -122,10 +123,9 @@ export default {
 
 
     onDone(result => {
-      const referrerLink = 'http://localhost:8000/users';
+      const referrerLink = document.referrer || 'http://localhost:8000/users';
       showGreeting.value = true;
       setCookie('dr_access_token', result.data.login.token);
-
       setTimeout(() => {
         window.location.replace(referrerLink);
       }, 2500)
@@ -188,12 +188,13 @@ export default {
 
 <style scoped lang="scss">
 .auth {
+  height: 100vh;
   display: flex;
   justify-content: center;
   padding: 20px;
 
   &__wrapper {
-    height: 100vh;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
