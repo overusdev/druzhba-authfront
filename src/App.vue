@@ -128,7 +128,7 @@ export default {
       setCookie('dr_access_token', result.data.login.token);
       setTimeout(() => {
         window.location.replace(referrerLink);
-      }, 2500)
+      }, 1000)
     })
 
     function deleteCookie(name) {
