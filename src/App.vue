@@ -2,23 +2,16 @@
   <div class="auth">
     <div class="auth__wrapper">
       <template v-if="!showGreeting">
-        <h3 class="text-h4">Пожалуйста, авторизуйтесь</h3>
+        <h3 class="auth__header">Пожалуйста, авторизуйтесь</h3>
         <div class="auth__form-wrapper">
-          <q-banner
+          <div
             v-if="showErrorMessage"
             inline-actions
-            class="text-white bg-red auth__input"
+            class="auth__warning"
           >
-            {{ errorTextMessage }}
-            <template v-slot:action>
-              <q-btn
-                flat
-                color="white"
-                label="Закрыть"
-                @click="hideErrorBanner"
-              />
-            </template>
-          </q-banner>
+            <p class="auth__warning-text">{{ errorTextMessage }}</p>
+            <q-icon name="close" color="red" @click="hideErrorBanner"/>
+          </div>
           <q-input
             v-model="authPhone"
             mask="##########"
@@ -45,12 +38,12 @@
               />
             </template>
           </q-input>
-          <q-btn
-            color="primary"
-            label="Войти"
+          <button
             class="auth__button"
             @click="sendAuth"
-          />
+          >
+            Войти
+          </button>
         </div>
       </template>
       <template v-else>
@@ -69,6 +62,9 @@ import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
 import { provideApolloClient } from "@vue/apollo-composable";
+import { logErrorMessages } from '@vue/apollo-util';
+import { onError } from '@apollo/client/link/error';
+
 
 export default {
   setup () {
@@ -97,7 +93,7 @@ export default {
       showErrorMessage.value = false;
     }
 
-    const { mutate: sendAuth, data, onDone } = useMutation(gql`
+    const { mutate: sendAuth, data, onDone, onError } = useMutation(gql`
         mutation login(
             $phone: String!,
             $password: String!,
@@ -129,6 +125,19 @@ export default {
       setTimeout(() => {
         window.location.replace(referrerLink);
       }, 1000)
+    })
+
+    onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors)
+        showErrorMessage.value = true;
+        graphQLErrors.map(({ message, locations, path }) => {
+            if (message === 'Incorect Password') {
+              errorTextMessage.value = 'Введен некорректный номер телефона/пароль';
+            }
+          }
+        )
+
+      if (networkError) console.log(`[Network error]: ${networkError}`)
     })
 
     function deleteCookie(name) {
@@ -191,14 +200,32 @@ export default {
   height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
+
+  @media screen and (min-width: 768px) {
+    padding: 20px;
+  }
+
+  &__header {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 0;
+    // @media screen and (min-width: 768px) {
+    //   padding: 20px;
+    // }
+  }
 
   &__wrapper {
-
+    width: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media screen and (min-width: 768px) {
+      width: 420px;
+    }
   }
 
   &__form-wrapper {
@@ -206,11 +233,37 @@ export default {
   }
 
   &__input {
+    margin-bottom: 38px;
+    @media screen and (min-width: 768px) {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__warning {
+    min-height: 60px;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 24px;
+    border-radius: 12px;
+    border: 2px solid red;
+  }
+
+  &__warning-text {
+    margin-bottom: 0;
   }
 
   &__button {
+    line-height: 1.5;
+    font-size: 18px;
     width: 100%;
+    padding: 12px 6px;
+    border-radius: 12px;
+    border: 2px solid #307526;
+    background: #307526;
+    color: #fff;
+    cursor: pointer;
   }
 }
 .logo {
