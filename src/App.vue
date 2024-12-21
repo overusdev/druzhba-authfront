@@ -132,7 +132,10 @@ export default {
         showErrorMessage.value = true;
         graphQLErrors.map(({ message, locations, path }) => {
             if (message === 'Incorect Password') {
-              errorTextMessage.value = 'Введен некорректный номер телефона/пароль';
+              errorTextMessage.value = 'Введен некорректный пароль';
+            }
+            if (message === "Cannot read properties of null (reading 'bcryptpassword')") {
+              errorTextMessage.value = 'Введен некорректный номер телефона';
             }
           }
         )
@@ -251,6 +254,7 @@ export default {
   }
 
   &__warning-text {
+    color: #b84040;
     margin-bottom: 0;
   }
 
