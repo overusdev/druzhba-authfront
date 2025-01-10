@@ -79,6 +79,7 @@ export default {
     const errorTextMessage = ref('');
     const greetingTextMessage = ref('');
     const cache = new InMemoryCache();
+
     const httpLink = new HttpLink({
       uri: 'http://localhost:3001/graphql'
     });

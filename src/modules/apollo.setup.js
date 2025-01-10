@@ -6,6 +6,8 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
 })
 
+console.log('ApolloSetup', import.meta.env);
+
 // Cache implementation
 const cache = new InMemoryCache()
 
