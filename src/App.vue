@@ -87,6 +87,7 @@ export default {
       uri: domainApi
     });
 
+    console.log('import.meta.env', import.meta.env);
     console.log('domainApi App', domainApi);
     const gqlClient = new ApolloClient({
       link: httpLink,
