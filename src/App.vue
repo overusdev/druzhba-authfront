@@ -92,6 +92,9 @@ export default {
     const gqlClient = new ApolloClient({
       link: httpLink,
       credentials: 'include',
+      fetchOptions: {
+        mode: 'no-cors'
+      },
       cache,
     });
     const disable = computed(() => authPhone.value.length < 10);
