@@ -86,6 +86,8 @@ export default {
     const httpLink = new HttpLink({
       uri: domainApi
     });
+
+    console.log('domainApi App', domainApi);
     const gqlClient = new ApolloClient({
       link: httpLink,
       credentials: 'include',
