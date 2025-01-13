@@ -80,14 +80,14 @@ export default {
     const greetingTextMessage = ref('');
     const cache = new InMemoryCache();
 
-    const domainApi = import.meta.env === 'production'
+    const domainApi = import.meta.env.MODE === 'production'
       ? 'https://druzba-nn.ru/graphql'
       : 'http://localhost:3001/graphql';
     const httpLink = new HttpLink({
       uri: domainApi
     });
 
-    console.log('import.meta.env', import.meta.env);
+    console.log('import.meta.env', import.meta.env.MODE);
     console.log('domainApi App', domainApi);
     const gqlClient = new ApolloClient({
       link: httpLink,
@@ -126,7 +126,7 @@ export default {
 
 
     onDone(result => {
-      const domain = import.meta.env === 'production'
+      const domain = import.meta.env.MODE === 'production'
         ? 'https://lk.druzba-nn.ru/users'
         : 'http://localhost:8000/users';
       const referrerLink = document.referrer || domain;

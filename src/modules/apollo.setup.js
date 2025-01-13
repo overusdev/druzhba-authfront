@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
 
-const domainApi = import.meta.env === 'production'
+const domainApi = import.meta.env.MODE === 'production'
   ? 'https://druzba-nn.ru/graphql'
   : 'http://localhost:3001/graphql';
 
