@@ -1,9 +1,12 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
 
+const domainApi = import.meta.env === 'production'
+  ? 'https://druzba-nn.ru/graphql'
+  : 'http://localhost:3001/graphql';
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: 'http://localhost:3001/graphql',
+  uri: domainApi,
 })
 
 console.log('ApolloSetup', import.meta.env);

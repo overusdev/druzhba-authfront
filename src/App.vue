@@ -120,7 +120,10 @@ export default {
 
 
     onDone(result => {
-      const referrerLink = document.referrer || 'http://localhost:8000/users';
+      const domain = import.meta.env === 'production'
+        ? 'https://lk.druzba-nn.ru/users'
+        : 'http://localhost:8000/users';
+      const referrerLink = document.referrer || domain;
       showGreeting.value = true;
       setCookie('dr_access_token', result.data.login.token);
       setTimeout(() => {
