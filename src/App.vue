@@ -61,9 +61,9 @@ import { useQuery, useMutation } from "@vue/apollo-composable";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
-import { provideApolloClient } from "@vue/apollo-composable";
-import { logErrorMessages } from '@vue/apollo-util';
-import { onError } from '@apollo/client/link/error';
+// import { provideApolloClient } from "@vue/apollo-composable";
+// import { logErrorMessages } from '@vue/apollo-util';
+// import { onError } from '@apollo/client/link/error';
 
 
 export default {
