@@ -80,8 +80,11 @@ export default {
     const greetingTextMessage = ref('');
     const cache = new InMemoryCache();
 
+    const domainApi = import.meta.env === 'production'
+      ? 'https://druzba-nn.ru/graphql'
+      : 'http://localhost:3001/graphql';
     const httpLink = new HttpLink({
-      uri: 'http://localhost:3001/graphql'
+      uri: domainApi
     });
     const gqlClient = new ApolloClient({
       link: httpLink,
