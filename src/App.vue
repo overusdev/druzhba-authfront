@@ -91,7 +91,8 @@ export default {
     console.log('domainApi App', domainApi);
     const gqlClient = new ApolloClient({
       link: httpLink,
-      credentials: 'include',
+      // credentials: 'include',
+      credentials: 'same-origin',
       fetchOptions: {
         mode: 'no-cors'
       },
