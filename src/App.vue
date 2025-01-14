@@ -87,12 +87,10 @@ export default {
       uri: domainApi
     });
 
-    console.log('import.meta.env', import.meta.env.MODE);
-    console.log('domainApi App', domainApi);
     const gqlClient = new ApolloClient({
       link: httpLink,
       // credentials: 'include',
-      credentials: 'same-origin',
+      // credentials: 'same-origin',
       fetchOptions: {
         mode: 'no-cors'
       },
@@ -136,6 +134,7 @@ export default {
       const referrerLink = document.referrer || domain;
       showGreeting.value = true;
       setCookie('dr_access_token', result.data.login.token);
+      // localStorage.setItem('dr_access_token', result.data.login.token);
       setTimeout(() => {
         window.location.replace(referrerLink);
       }, 1000)

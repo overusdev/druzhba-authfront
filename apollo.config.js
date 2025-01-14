@@ -12,5 +12,3 @@ module.exports = {
         ],
     },
 }
-
-console.log('PROC', import.meta.env);

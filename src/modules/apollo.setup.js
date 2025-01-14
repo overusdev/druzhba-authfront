@@ -4,7 +4,6 @@ const domainApi = import.meta.env.MODE === 'production'
   ? 'https://druzba-nn.ru/graphql'
   : 'http://localhost:3001/graphql';
 
-console.log('domainApi', domainApi);
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
@@ -17,6 +16,7 @@ const cache = new InMemoryCache()
 // Create the apollo client
 const apolloClient = new ApolloClient({
   link: httpLink,
+  // credentials: 'same-origin',
   fetchOptions: {
     mode: 'no-cors'
   },
