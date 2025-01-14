@@ -129,14 +129,16 @@ export default {
 
     onDone(result => {
       const domain = import.meta.env.MODE === 'production'
-        ? 'https://lk.druzba-nn.ru/users'
-        : 'http://localhost:8000/users';
+        ? `https://lk.druzba-nn.ru/users?token=${result.data.login.token}`
+        : `http://localhost:8000/jwt.html?token=${result.data.login.token}`;
+        // : `http://localhost:8000/users?token=${result.data.login.token}`;
       const referrerLink = document.referrer || domain;
       showGreeting.value = true;
-      setCookie('dr_access_token', result.data.login.token);
+      // setCookie('dr_access_token', result.data.login.token);
       // localStorage.setItem('dr_access_token', result.data.login.token);
       setTimeout(() => {
-        window.location.replace(referrerLink);
+        // window.location.replace(referrerLink);
+        window.location.replace(domain);
       }, 1000)
     })
 
@@ -182,7 +184,7 @@ export default {
             updatedCookie += "=" + optionValue;
           }
         }
-      
+
         document.cookie = updatedCookie;
     }
 
