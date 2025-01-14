@@ -129,7 +129,7 @@ export default {
 
     onDone(result => {
       const domain = import.meta.env.MODE === 'production'
-        ? `https://lk.druzba-nn.ru/users?token=${result.data.login.token}`
+        ? `https://lk.druzba-nn.ru/jwt.html?token=${result.data.login.token}`
         : `http://localhost:8000/jwt.html?token=${result.data.login.token}`;
         // : `http://localhost:8000/users?token=${result.data.login.token}`;
       const referrerLink = document.referrer || domain;
