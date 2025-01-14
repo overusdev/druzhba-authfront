@@ -90,7 +90,7 @@ export default {
     const gqlClient = new ApolloClient({
       link: httpLink,
       // credentials: 'include',
-      // credentials: 'same-origin',
+      credentials: 'same-origin',
       fetchOptions: {
         mode: 'no-cors'
       },

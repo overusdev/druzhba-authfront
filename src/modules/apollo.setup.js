@@ -16,7 +16,7 @@ const cache = new InMemoryCache()
 // Create the apollo client
 const apolloClient = new ApolloClient({
   link: httpLink,
-  // credentials: 'same-origin',
+  credentials: 'same-origin',
   fetchOptions: {
     mode: 'no-cors'
   },
