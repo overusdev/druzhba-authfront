@@ -61,10 +61,6 @@ import { useQuery, useMutation } from "@vue/apollo-composable";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
-// import { provideApolloClient } from "@vue/apollo-composable";
-// import { logErrorMessages } from '@vue/apollo-util';
-// import { onError } from '@apollo/client/link/error';
-
 
 export default {
   setup () {
@@ -90,7 +86,6 @@ export default {
     const gqlClient = new ApolloClient({
       link: httpLink,
       credentials: 'include',
-      // credentials: 'same-origin',
       fetchOptions: {
         mode: 'no-cors'
       },
@@ -131,11 +126,9 @@ export default {
       const domain = import.meta.env.MODE === 'production'
         ? `https://lk.druzba-nn.ru/jwt.html?token=${result.data.login.token}`
         : `http://localhost:8000/jwt.html?token=${result.data.login.token}`;
-        // : `http://localhost:8000/users?token=${result.data.login.token}`;
       const referrerLink = document.referrer || domain;
       showGreeting.value = true;
       // setCookie('dr_access_token', result.data.login.token);
-      // localStorage.setItem('dr_access_token', result.data.login.token);
       setTimeout(() => {
         // window.location.replace(referrerLink);
         window.location.replace(domain);
@@ -230,9 +223,6 @@ export default {
     font-weight: 400;
     line-height: 24px;
     margin-top: 0;
-    // @media screen and (min-width: 768px) {
-    //   padding: 20px;
-    // }
   }
 
   &__wrapper {

@@ -20,14 +20,9 @@ import { ApolloClients } from "@vue/apollo-composable";
 import 'quasar/src/css/index.sass';
 import App from './App.vue';
 const pinia = createPinia();
-// const app = createApp(App);
-
 const app = createApp({
   setup() {
     provide(ApolloClients, apolloClients);
-    // provide(ApolloClients, {
-    //   default: apolloClient,
-    // })
   },
   render: () => h(App),
 });

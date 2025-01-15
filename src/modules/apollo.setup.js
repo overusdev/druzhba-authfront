@@ -9,15 +9,12 @@ const httpLink = createHttpLink({
   // You should use an absolute URL here
   uri: domainApi,
 })
-
 // Cache implementation
 const cache = new InMemoryCache()
-
 // Create the apollo client
 const apolloClient = new ApolloClient({
   link: httpLink,
   credentials: 'include',
-  // credentials: 'same-origin',
   fetchOptions: {
     mode: 'no-cors'
   },
